@@ -1,0 +1,47 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import Select
+
+
+driver=webdriver.Chrome(service=Service("C:\Program Files\Drivers\chromedriver\chromedriver.exe"))
+
+driver.get("https://www.facebook.com/")
+driver.implicitly_wait(5)
+
+
+create_account=driver.find_element(By.XPATH,"(//a[normalize-space()='Create new account'])[1]")
+create_account.click()
+
+first_name=driver.find_element(By.NAME,"firstname")
+first_name.send_keys("Feyintola")
+
+surname=driver.find_element(By.NAME,"lastname")
+surname.send_keys("Adebayo")
+
+email=driver.find_element(By.NAME,"reg_email__")
+email.send_keys("tolabayo@gmail.com")
+
+email_con=driver.find_element(By.NAME,"reg_email_confirmation__")
+email_con.send_keys("tolabayo@gmail.com")
+
+password=driver.find_element(By.XPATH,"//input[@id='password_step_input']")
+password.send_keys("1a2b3c4d5e678")
+time.sleep(2)
+
+datedrp=Select(driver.find_element(By.XPATH,"(//select[@id='day'])[1]"))
+datedrp.select_by_visible_text("19")
+
+monthdrp=Select(driver.find_element(By.XPATH,"(//select[@id='month'])[1]"))
+monthdrp.select_by_value("8")
+
+yeardrp=Select(driver.find_element(By.XPATH,"//select[@id='year']"))
+yeardrp.select_by_visible_text("1998")
+
+driver.find_element(By.XPATH,"//label[normalize-space()='Female']").click()
+
+driver.find_element(By.XPATH,"/html/body/div[3]/div[2]/div/div/div[2]/div/div/div[1]/form/div[1]/div[11]/button").click()
+time.sleep(10)
+
+driver.close()
